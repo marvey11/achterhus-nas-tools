@@ -1,0 +1,15 @@
+[Unit]
+Description=Automated Document Processor
+After=network.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.achterhus/nas-tools.conf
+ExecStart=/bin/bash ${SCRIPTS_DIR}/document-processor.sh
+
+# can't use variables from the config here, but substitutions still work...
+StandardOutput=append:%h/.achterhus/log/%N.log
+StandardError=append:%h/.achterhus/log/%N.log
+
+[Install]
+WantedBy=default.target
