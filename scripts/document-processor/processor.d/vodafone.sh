@@ -1,0 +1,12 @@
+function process_vodafone() {
+    local file="$1"
+    local filename
+    
+    filename=$(basename "$file")
+
+    # Pattern: YYYY-MM-DD_Rechnung_Kundennr_119518058.pdf
+    if [[ $filename =~ ^([0-9]{4})-[0-9]{2}-[0-9]{2}_Rechnung.* ]]; then
+        year="${BASH_REMATCH[1]}"
+        move_and_verify "$file" "$TARGET_BASE/telecom/vodafone.com/$year" "$filename"
+    fi
+}
