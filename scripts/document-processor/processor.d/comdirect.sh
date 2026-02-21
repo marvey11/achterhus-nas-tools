@@ -26,7 +26,7 @@ function process_comdirect() {
             ;;
         
         # 2. Securities Documents
-        Dividendengutschrift* | Erträgnisgutschrift* | Wertpapierabrechnung* | Steuermitteilung*)
+        Buchungsanzeige* | Dividendengutschrift* | Erträgnisgutschrift* | Wertpapierabrechnung* | Steuermitteilung*)
             # --- NORMALISATION ---
             clean="${file//_WKN_/_}"
             clean=$(echo "$clean" | sed 's/\([A-Z0-9]\{6\}\)(/\1_(/g')
