@@ -17,11 +17,12 @@ function process_comdirect() {
                 target_dir="${COMDIRECT_BASE}/statements/$year"
                 target_name="${iso_date}_Finanzreport_Nr_${report_nr}.pdf"
 
-                echo "[$(date)] INFO: Matched comdirect document: Type='Finanzreport', ISO Date='${iso_date}'"
-
                 move_and_verify "$file" "$target_dir" "$target_name"
                 return $?
             fi
+
+            # If we reach here, it means we failed to process the file
+            return 1
             ;;
         
         # 2. Securities Documents
@@ -44,23 +45,21 @@ function process_comdirect() {
                     target_dir="${COMDIRECT_BASE}/securities/$year/$wkn"
                     target_name="${iso_date}_${filename}"
                     
-                    echo "[$(date)] INFO: Matched comdirect securities document: WKN='$wkn', ISO Date='${iso_date}'"
-                    
                     move_and_verify "$file" "$target_dir" "$target_name"
                     return $?
                 fi
-
-                # If we got the date but not the WKN, that's still a problem
-                return 1
             else
                 echo "WARN: Transaction pattern match failed for '$file'"
-                return 1
             fi
+
+            # If we reach here, it means we failed to process the file
+            return 1
             ;;
  
         # 3. Catch-all for everything else
         *)
             echo "Skipping unknown file type: $file"
+            return 1
             ;;
     esac
 }
