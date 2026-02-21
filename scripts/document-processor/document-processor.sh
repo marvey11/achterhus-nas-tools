@@ -8,10 +8,12 @@ export TARGET_BASE
 
 # Enable associative arrays
 declare -A stats
+stats=()  # Initialize empty stats array
 export stats
 
 workdir="$(dirname "$0")"
 source "$workdir/utils.sh"
+source "$workdir/report.sh"
 
 processor_dir="$workdir/processor.d"
 for proc in "$processor_dir"/*.sh; do
@@ -45,3 +47,4 @@ for dir in "$DROPZONE"/*/; do
 done
 
 generate_summary
+generate_json_report
