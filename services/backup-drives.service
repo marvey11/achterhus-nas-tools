@@ -3,7 +3,7 @@ Description=Daily Backup of the Storage Drive
 
 [Service]
 Type=oneshot
-EnvironmentFile=%h/.achterhus/nas-tools.conf
+EnvironmentFile=%h/.achterhus/conf/nas-tools.conf
 ExecStart=/bin/bash ${SCRIPTS_DIR}/backup-drives.sh
 
 # can't use variables from the config here, but substitutions still work...

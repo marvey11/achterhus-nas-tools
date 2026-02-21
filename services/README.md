@@ -2,15 +2,15 @@
 
 ## Installing and Enabling a Service
 
-Since all services here only require user-level access, we will install the service with user-level permissions only.
+Since all services here only require user-level access, all the services are installed with user-level permissions only.
 
-First create the user-level `systemd` folder:
+Create the user-level `systemd` folder:
 
 ```shell
 mkdir -p ~/.config/systemd/user
 ```
 
-Now, symlink all the service and timer files into that newly created directory.
+Symlink all the service and timer files into that newly created directory.
 
 ```shell
 ln -s ~/achterhus-nas-tools/services/backup-drives.service ~/.config/systemd/user/backup-drives.service
@@ -23,19 +23,21 @@ Subsequently, the daemon needs to be reloaded. This ensures that all services ar
 systemctl --user daemon-reload
 ```
 
-Services can be run manually. Simply specify the `start` command:
+This also applied if any of the service or timer files has been modified.
+
+Services can be run manually b simply specifying the `start` command:
 
 ```shell
 systemctl --user start backup-drives.service
 ```
 
-The timer needs to be enabled separately.
+Timers need to be enabled separately.
 
 ```shell
 systemctl --user enable --now backup-drives.timer
 ```
 
-To find out whether the timer was installed correctly, we can retrieve the list of currently active timers.
+To find out whether the timer was installed correctly, the list of currently active timers can e queried.
 
 ```shell
 systemctl --user list-timers
