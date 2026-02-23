@@ -19,13 +19,15 @@ processor_dir="$workdir/processor.d"
 for proc in "$processor_dir"/*.sh; do
     [ -e "$proc" ] || continue
     # shellcheck source=./processor.d/comdirect.sh
+    # shellcheck source=./processor.d/ryd.sh
     # shellcheck source=./processor.d/vodafone.sh
     source "$proc"
 done
 
 # --- MAIN LOOP ---
-for dir in "$DROPZONE"/*/; do
-[ -d "$dir" ] || continue
+for dir in "$DROPZONE"/*; do
+    [ -d "$dir" ] || continue
+
     category=$(basename "$dir")
     processor="process_${category}"
     

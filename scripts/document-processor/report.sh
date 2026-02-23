@@ -35,7 +35,6 @@ function generate_json_report() {
     local tmp_file
     tmp_file=$(mktemp "$STATS_FILE.XXXXXX")
 
-    # Note: Changed $total to $total_count to match the --argjson name
     jq --arg date "$timestamp" \
        --argjson total_count "$total_files" \
        --argjson categories "$cat_json" \
