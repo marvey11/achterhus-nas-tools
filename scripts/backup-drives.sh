@@ -16,7 +16,7 @@ echo "--- Backup Started: $(date) ---"
 # -z (compress during transfer)
 # -x (don't cross filesystem boundaries)
 # --delete (remove files at destination that are gone from source)
-# --exclude (exclude specific directories, in this case 'lost+found' and '.deleted/')
-rsync -avhzx --delete --exclude='lost+found' --exclude='.deleted/' $SOURCE $DEST
+# --exclude (exclude specific directories, in this case 'lost+found', 'temp', and '.deleted/')
+rsync -avhzx --delete --exclude='lost+found' --exclude='temp' --exclude='.deleted/' $SOURCE $DEST
 
 echo "--- Backup Finished: $(date) ---"
