@@ -1,0 +1,16 @@
+[Unit]
+Description=Automated Photo Processor
+ConditionPathNotEmpty=%h/photo-inbox
+After=network.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.achterhus/conf/nas-tools.conf
+ExecStart=/bin/bash ${SCRIPTS_DIR}/photo-processor.sh
+
+# can't use variables from the config here, but substitutions still work...
+StandardOutput=append:%h/.achterhus/log/%N.log
+StandardError=append:%h/.achterhus/log/%N.log
+
+[Install]
+WantedBy=default.target
